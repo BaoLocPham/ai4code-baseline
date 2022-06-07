@@ -38,6 +38,14 @@ df_orders = pd.read_csv(
     squeeze=True,
 ).str.split()
 
+train_ds = MarkdownDataset(train_df_mark, model_name_or_path=CFG.BERT_PATH, md_max_len=CFG.MAX_LEN,
+                           total_max_len=CFG.TOTAL_MAX_LEN, fts=train_fts)
+val_ds = MarkdownDataset(val_df_mark, model_name_or_path=CFG.BERT_PATH, md_max_len=CFG.MAX_LEN,
+                         total_max_len=CFG.TOTAL_MAX_LEN, fts=val_fts)
+train_loader = DataLoader(train_ds, batch_size=CFG.BS, shuffle=True, num_workers=CFG.NW,
+                          pin_memory=False, drop_last=True)
+val_loader = DataLoader(val_ds, batch_size=CFG.BS, shuffle=False, num_workers=CFG.NW,
+                        pin_memory=False, drop_last=False)
 
 def read_data(data):
     return tuple(d.cuda() for d in data[:-1]), data[-1].cuda()
@@ -139,7 +147,7 @@ WANDB_CONFIG = {
     'DEVICE': "cuda",
     'competition': 'ai4code',
 }
-run = wandb.init(name="name", project="pytorch-intro")
+run = wandb.init(name="CodeBert-Baseline", project="AI4Code")
 wandb.watch_called = False 
 np.random.seed(0)
 
