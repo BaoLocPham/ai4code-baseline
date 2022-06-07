@@ -147,6 +147,10 @@ WANDB_CONFIG = {
     'DEVICE': "cuda",
     'competition': 'ai4code',
 }
+
+wb_key = "1f1a527a85be9d41cffc5b10cf8be3c701778886"
+wandb.login(key=wb_key)
+
 run = wandb.init(name="CodeBert-Baseline", project="AI4Code")
 wandb.watch_called = False 
 np.random.seed(0)
