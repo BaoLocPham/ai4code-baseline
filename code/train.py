@@ -10,7 +10,8 @@ import sys, os
 from metrics import *
 import torch
 import argparse
-import config
+from config import CFG
+import wandb
 
 parser = argparse.ArgumentParser(description='Process some arguments')
 parser.add_argument('--model_name_or_path', type=str, default='microsoft/codebert-base')
