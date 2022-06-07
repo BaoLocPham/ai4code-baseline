@@ -8,7 +8,7 @@ class CFG:
     ACCUMULATION_STEPS = 4
     LR = 5e-5
     
-    BS = 48 #batch size
+    BS = 16 #batch size
     NW = 2 # num woker
     EPOCHS = 3 
     DATA_DIR = Path('../content/AI4Code')
